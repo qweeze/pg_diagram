@@ -1,0 +1,11 @@
+README.md
+setup.cfg
+setup.py
+pg_diagram/__init__.py
+pg_diagram/__main__.py
+pg_diagram/base.py
+pg_diagram.egg-info/PKG-INFO
+pg_diagram.egg-info/SOURCES.txt
+pg_diagram.egg-info/dependency_links.txt
+pg_diagram.egg-info/entry_points.txt
+pg_diagram.egg-info/top_level.txt

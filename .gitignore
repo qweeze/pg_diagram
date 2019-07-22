@@ -1,0 +1,21 @@
+__pycache__
+.git
+.cache
+.idea
+.vscode
+dist/
+.mypy_cache/
+.pytest_cache/
+.coverage
+.ipynb_checkpoints/
+
+*.py[cod]
+venv/
+
+.DS_Store
+
+# local env files
+src/.env.local
+.env.*.local
+
+test_data/
