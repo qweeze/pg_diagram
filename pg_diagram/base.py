@@ -98,6 +98,11 @@ create_table_expr: pp.ParseExpression = (
 )
 
 
+class ParseError(Exception):
+    def __init__(self, statement: str):
+        self.statement = statement
+
+
 def parse(schema: str) -> t.Tuple[t.List[Table], t.List[ForeignKey]]:
     tables: t.Dict[str, Table] = {}
     foreign_keys: t.List[ForeignKey] = []
@@ -113,7 +118,10 @@ def parse(schema: str) -> t.Tuple[t.List[Table], t.List[ForeignKey]]:
         if not _stmt_upper.startswith('CREATE TABLE'):
             continue
 
-        res: pp.ParseResults = create_table_expr.parseString(statement)
+        try:
+            res: pp.ParseResults = create_table_expr.parseString(statement)
+        except pp.ParseException:
+            raise ParseError(statement)
         table = Table(
             name=res['table_name'],
             columns={
@@ -129,12 +137,18 @@ def parse(schema: str) -> t.Tuple[t.List[Table], t.List[ForeignKey]]:
             continue
 
         if 'PRIMARY KEY' in _stmt_upper:
-            res = primary_key_expr.parseString(statement)
+            try:
+                res = primary_key_expr.parseString(statement)
+            except pp.ParseException:
+                raise ParseError(statement)
             column: Column = tables[res['table_name']].columns[res['column_name']]
             column.primary_key = True
 
         elif 'FOREIGN KEY' in _stmt_upper:
-            res = foreign_key_expr.parseString(statement)
+            try:
+                res = foreign_key_expr.parseString(statement)
+            except pp.ParseException:
+                raise ParseError(statement)
             foreign_keys.append(
                 ForeignKey(
                     table_name=res['table_name'],
@@ -194,14 +208,3 @@ def render(graph: graphviz.Digraph, format: str) -> bytes:
         graph.render('graph', format=format, directory=dirpath)
         data: bytes = (pathlib.Path(dirpath) / f'graph.{format}').read_bytes()
     return data
-
-
-if __name__ == '__main__':
-    for schema_name in pathlib.Path('test_data').glob('*.sql'):
-        print(schema_name)
-        schema = pathlib.Path(schema_name).read_text()
-
-        tables, foreign_keys = parse(schema)
-        graph = create_graph(tables, foreign_keys)
-        with open(f'test_data/{schema_name.stem}.png', 'wb') as f:
-            f.write(render(graph, format='png'))

@@ -21,7 +21,15 @@ from . import base
 )
 def main(schema, format: str, output):
     """Converts postgresql schema to ER diagram"""
-    graph = base.create_graph(*base.parse(schema.read()))
+    try:
+        graph = base.create_graph(*base.parse(schema.read()))
+    except base.ParseError as exc:
+        click.secho(
+            f'Could not parse statement:\n{exc.statement}',
+            fg='red',
+        )
+        exit(1)
+
     output.write(base.render(graph, format=format))
 
 

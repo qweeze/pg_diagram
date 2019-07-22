@@ -6,7 +6,7 @@ setup(
     name='pg-diagram',
     author='qweeze',
     author_email='qweeeze@gmail.com',
-    version='0.1.0',
+    version='0.1.2',
     description='A tool for creating ER diagrams from postgresql database schemas',
     long_description=(pathlib.Path(__file__).parent / 'README.md').read_text(),
     long_description_content_type='text/markdown',
