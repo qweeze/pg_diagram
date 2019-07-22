@@ -1,2 +1,0 @@
-[console_scripts]
-pg_diagram = pg_diagram.__main__:main
