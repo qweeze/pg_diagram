@@ -4,6 +4,8 @@ __pycache__
 .idea
 .vscode
 dist/
+build/
+*.egg-info
 .mypy_cache/
 .pytest_cache/
 .coverage

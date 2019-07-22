@@ -10,6 +10,7 @@ ipython = "*"
 rope = "*"
 pre-commit = "*"
 pytest = "*"
+twine = "*"
 
 [packages]
 sqlparse = "*"

@@ -2,7 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/pg-diagram.svg)](https://badge.fury.io/py/pg-diagram)
 
-A tool for creating [Entity-relationship diagrams](https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model)
+A tool for creating [Entity-relationship diagrams](https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model) for PostgreSQL
 
 ### Installation
 
