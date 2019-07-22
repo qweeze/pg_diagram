@@ -12,6 +12,11 @@ setup(
     long_description_content_type='text/markdown',
     url='https://github.com/qweeze/pg_diagram',
     packages=['pg_diagram'],
+    install_requires=[
+        'sqlparse',
+        'graphviz',
+        'click',
+    ],
     entry_points={
         'console_scripts': ['pg_diagram=pg_diagram.__main__:main'],
     },
