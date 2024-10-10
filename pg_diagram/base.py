@@ -74,7 +74,7 @@ create_table_expr: pp.ParseExpression = (
     _identifier('schema') + pp.Suppress('.') + _identifier('table_name') +
     pp.Suppress('(') +
     pp.delimitedList(
-        (pp.Suppress('CONSTRAINT' + pp.Regex(r'[^,]+')))
+        (pp.Suppress('CONSTRAINT' + pp.Regex(r'[^\n,]+')))
         |
         pp.Group(
             _identifier('name') + _identifier('data_type') +
