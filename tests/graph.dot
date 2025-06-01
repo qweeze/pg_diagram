@@ -1,0 +1,81 @@
+digraph ERD {
+	graph [bb="0,0,763.5,404",
+		overlap=false,
+		randkir=LR
+	];
+	node [fontname=Verdana,
+		fontsize=9,
+		label="\N",
+		shape=record
+	];
+	author	[height=1.0278,
+		label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="4"><tr><td bgcolor="lightblue"><b>author</b></td></tr><tr><td port="id" align="left"><b>id</b>: <b>[PK]</b> <i>INT  NOT NULL</i></td></tr>
+<tr><td port="f_name" align="left"><b>f_name</b>: <i>VARCHAR(256)  NOT NULL</i></td></tr></table>>,
+		pos="95.875,191",
+		shape=none,
+		width=2.6632];
+	book_author	[height=1.0278,
+		label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="4"><tr><td bgcolor="lightblue"><b>book_author</b></td></tr><tr><td port="book_id" align="left"><b>book_id</b>: <i>INT </i></td></tr>
+<tr><td port="author_id" align="left"><b>author_id</b>: <i>INT </i></td></tr></table>>,
+		pos="178.88,356",
+		shape=none,
+		width=1.4028];
+	book_author:author_id -> author:id	[pos="e,184.88,191 134.88,334 72.543,334 226.18,211.44 195.91,193.25"];
+	book_meta	[height=2.25,
+		label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="4"><tr><td bgcolor="lightblue"><b>book_meta</b></td></tr><tr><td port="id" align="left"><b>id</b>: <b>[PK]</b> <i>INT  NOT NULL</i></td></tr>
+<tr><td port="title" align="left"><b>title</b>: <i>VARCHAR(1024)  NOT NULL</i></td></tr>
+<tr><td port="f_size" align="left"><b>f_size</b>: <i>INT  NOT NULL</i></td></tr>
+<tr><td port="add_date" align="left"><b>add_date</b>: <i>DATE </i></td></tr>
+<tr><td port="lang_id" align="left"><b>lang_id</b>: <i>INT </i></td></tr>
+<tr><td port="origin_id" align="left"><b>origin_id</b>: <i>INT  NOT NULL</i></td></tr></table>>,
+		pos="298.88,191",
+		shape=none,
+		width=2.4757];
+	book_author:book_id -> book_meta:id	[pos="e,216.88,235 222.88,356 271.67,356 182.88,256.62 205.87,237.99"];
+	book_genre	[height=1.0278,
+		label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="4"><tr><td bgcolor="lightblue"><b>book_genre</b></td></tr><tr><td port="book_id" align="left"><b>book_id</b>: <i>INT  NOT NULL</i></td></tr>
+<tr><td port="genre_id" align="left"><b>genre_id</b>: <i>INT  NOT NULL</i></td></tr></table>>,
+		pos="350.88,356",
+		shape=none,
+		width=2.0174];
+	book_genre:book_id -> book_meta:id	[pos="e,380.88,235 284.88,356 268.42,356 277.04,332.88 285.88,319 310.97,279.6 354.78,311.4 379.88,272 385.67,262.89 391.38,249.81 389.96,\
+241.88"];
+	genre	[height=1.0278,
+		label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="4"><tr><td bgcolor="lightblue"><b>genre</b></td></tr><tr><td port="id" align="left"><b>id</b>: <b>[PK]</b> <i>INT  NOT NULL</i></td></tr>
+<tr><td port="code" align="left"><b>code</b>: <i>CHAR(32)  NOT NULL</i></td></tr></table>>,
+		pos="481.88,191",
+		shape=none,
+		width=2.1111];
+	book_genre:genre_id -> genre:id	[pos="e,412.88,191 416.88,334 444.07,334 398.54,229.35 404.72,199.1"];
+	lang_code	[height=1.0278,
+		label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="4"><tr><td bgcolor="lightblue"><b>lang_code</b></td></tr><tr><td port="id" align="left"><b>id</b>: <b>[PK]</b> <i>INT  NOT NULL</i></td></tr>
+<tr><td port="code" align="left"><b>code</b>: <i>CHAR(8)  NOT NULL</i></td></tr></table>>,
+		pos="298.88,37",
+		shape=none,
+		width=2.0278];
+	book_meta:lang_id -> lang_code:id	[pos="e,364.88,37 380.88,147 402.1,147 393.27,65.762 374.69,42.914"];
+	book_series	[height=1.3333,
+		label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="4"><tr><td bgcolor="lightblue"><b>book_series</b></td></tr><tr><td port="book_id" align="left"><b>book_id</b>: <i>INT  NOT NULL</i></td></tr>
+<tr><td port="series_id" align="left"><b>series_id</b>: <i>INT  NOT NULL</i></td></tr>
+<tr><td port="pos" align="left"><b>pos</b>: <i>INT </i></td></tr></table>>,
+		pos="617.88,356",
+		shape=none,
+		width=2.0278];
+	book_series:book_id -> book_meta:id	[pos="e,380.88,235 551.88,367 511.48,367 423.35,302.52 396.88,272 388.99,262.91 392.56,249.33 390.33,241.4"];
+	series	[height=1.0278,
+		label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="4"><tr><td bgcolor="lightblue"><b>series</b></td></tr><tr><td port="id" align="left"><b>id</b>: <b>[PK]</b> <i>INT  NOT NULL</i></td></tr>
+<tr><td port="name" align="left"><b>name</b>: <i>VARCHAR(1024)  NOT NULL</i></td></tr></table>>,
+		pos="669.88,191",
+		shape=none,
+		width=2.6007];
+	book_series:series_id -> series:id	[pos="e,582.88,191 683.88,345 700.33,345 690.16,322.75 682.88,308 657.81,257.29 608.94,278.71 583.88,228 579.21,218.55 573.36,206.02 574.08,\
+198.24"];
+}

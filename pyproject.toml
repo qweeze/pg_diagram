@@ -1,0 +1,84 @@
+[project]
+name = "pg_diagram"
+version = "0.2.0"
+description = "A tool for creating ER diagrams from postgresql database schemas"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "graphviz>=0.20.3",
+    "sqlglot>=26.24.0",
+]
+[project.scripts]
+pg_diagram = "pg_diagram.__main__:main"
+
+[dependency-groups]
+dev = [
+    "ipdb>=0.13.13",
+    "ipython>=9.3.0",
+    "mypy>=1.16.0",
+    "pytest>=8.3.5",
+    "ruff>=0.11.12",
+]
+
+[build-system]
+requires = ["uv_build>=0.7.9,<0.8.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-root = ""
+
+[tool.mypy]
+python_version = '3.12'
+strict = true
+exclude = [
+  ".venv",
+]
+ignore_missing_imports = true
+
+[tool.ruff]
+line-length = 88
+target-version = 'py312'
+lint.ignore = [
+  "COM812", # commas conflict
+  "PERF401", # `list.extend` to create a transformed list
+]
+lint.select = [
+  "A",  # flake8-builtins
+  "ANN",  # flake8-annotations
+  "ARG",
+  "ASYNC",  # flake8-async
+  "B",  # flake8-bugbear
+  "COM",  # flake8-commas
+  "DTZ",  # flake8-datetimez
+  "E",  # pycodestyle [Error]
+  "ERA",  # eradicate
+  "F",  # PyFlakes
+  "I",  # isort
+  "ICN001",  # flake8-import-conventions [Only disallow unconventional imports]
+  "G002",  # flake8-logging-format [Only %s rule enforcement]
+  "PERF",  # Perflint
+  "PIE",  # flake8-pie
+  "PL",  # PyLint [ALL]
+  "PT01",  # flake8-pytest-style [exlcuded 00* block that forces strange
+  "PT02",  # naming conventions and do not contribute anything meaningful :)]
+  "PTH",  # flake8-use-pathlib
+  "PYI",  # flake8-pyi
+  "RET",  # flake8-return (controvertial, consider revisiting ruleset)
+  "RSE",  # flake8-raise
+  "RUF",  # Ruff specific rules
+  "SIM2",  # flake8-simplify [conditional "expr" rules]
+  "T20",  # flake8-print (LOL)
+  "TID",  # flake8-tidy-imports,
+  "Q",  # flake8-quotes
+  "W",  # pycodestyle [Warning]
+  "T100",  # flake8-debugger
+]
+
+[tool.ruff.lint.isort]
+combine-as-imports = false
+force-to-top = ["metrics"]
+known-local-folder = ["metrics"]
+no-lines-before = ["future", "standard-library"]
+
+[tool.ruff.lint.pylint]
+max-args = 8
